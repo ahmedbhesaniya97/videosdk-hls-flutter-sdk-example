@@ -33,14 +33,14 @@ jobs:
       # Get flutter dependencies.
       - run: flutter pub get
 
-      # Build apk.
-      - run: flutter build apk
+      # Build Bundle.
+      - run: flutter build appbundle
       # 3
-      - name: Upload APK
+      - name: Upload Bundle
         uses: actions/upload-artifact@v2
         with:
-          name: app-release.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: app.aab
+          path: build/app/outputs/bundle/release/app.aab.
   
   deploy-firebase:
     # 1
@@ -57,5 +57,5 @@ jobs:
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
-          groups: flutter-android-demo
-          file: app-release.apk
+          groups: flutter-android-hls
+          file: app.aab
